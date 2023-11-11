@@ -2,6 +2,9 @@
 ## Requirements
 
 No requirements.
+## Providers
+
+No providers.
 }
 ```
 ## Resources
