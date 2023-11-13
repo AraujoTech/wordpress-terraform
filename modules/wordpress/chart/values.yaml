@@ -1,4 +1,16 @@
-image:
-wordpress-version: 
-db-host:
-db-secret:
+# -- Imagem docker usada para o deployment do wordpress
+image: bitnami/wordpress
+
+# -- Versão da imagem do wordpress utilizada, a mesma deve conter o PG4WP. Para mais informações consulte https://github.com/PostgreSQL-For-Wordpress/postgresql-for-wordpress 
+wordpressVersion: "latest"
+
+# -- Porta usada para acesso ao wordpress
+port: 80
+
+# -- Host para conexão com o banco de dados
+databaseHost:
+
+# -- Nome da secret que armazenará as informações do banco de dados
+databaseSecret: mysql-keys
+
+plugins: "wpackagist-plugin/redis-cache"

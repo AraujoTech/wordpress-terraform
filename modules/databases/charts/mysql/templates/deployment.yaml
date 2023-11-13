@@ -19,26 +19,33 @@ spec:
         tier: databases
     spec:
       containers:
-      - image: {{ .Values.image}}:{{ .Values.postgresVersion}}
-        name: postgresql
+      - image: {{ .Values.image}}:{{ .Values.mysqlVersion}}
+        name: mysql
         env:
-        - name: POSTGRES_PASSWORD
+        - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{.Values.postgresSecret}}
+              name: {{.Values.mysqlSecret}}
+              key: root_password
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{.Values.mysqlSecret}}
               key: password
-        - name: POSTGRES_USER
+        - name: MYSQL_USER
           valueFrom:
             secretKeyRef:
-              name: {{.Values.postgresSecret}}
+              name: {{.Values.mysqlSecret}}
               key: user
+        - name: MYSQL_DATABASE
+          value: wordpress
         ports:
         - containerPort: {{ .Values.port}}
-          name: postgresql
+          name: mysql
         volumeMounts:
-        - name: postgresql-persistent-storage
-          mountPath: /var/lib/postgresql
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
       volumes:
-      - name: postgresql-persistent-storage
+      - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: {{ .Release.Name }}-pv-claim

@@ -8,9 +8,10 @@ Chart Auxiliar para deploy do Postgres
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| image | string | `"postgres"` | Imagem docker usada para o deployment |
-| password | string | `"gerado automaticamente"` | Password usado para acessar ao banco de dados |
-| port | int | `5432` | Porta usada para acesso ao postgres |
-| postgresVersion | float | `14.2` | Versão do postgres, deve-se utilizar uma versão compatível com PG4WP. Para mais informações consulte https://github.com/PostgreSQL-For-Wordpress/postgresql-for-wordpress  |
-| user | string | `"wordpress"` | User usado para acessar ao banco de dados.  |
+| databaseHost | string | `nil` | Host para conexão com o banco de dados |
+| databaseSecret | string | `"mysql-keys"` | Nome da secret que armazenará as informações do banco de dados |
+| image | string | `"bitnami/wordpress"` | Imagem docker usada para o deployment do wordpress |
+| plugins | string | `"wpackagist-plugin/redis-cache"` |  |
+| port | int | `80` | Porta usada para acesso ao wordpress |
+| wordpressVersion | string | `"latest"` | Versão da imagem do wordpress utilizada, a mesma deve conter o PG4WP. Para mais informações consulte https://github.com/PostgreSQL-For-Wordpress/postgresql-for-wordpress  |
 
