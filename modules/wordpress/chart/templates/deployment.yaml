@@ -18,6 +18,8 @@ spec:
         app: wordpress
         tier: frontend
     spec:
+    # Configurar o init container para mover os arquivos
+      initContainers: 
       containers:
       - image: {{ .Values.image}}:{{ .Values.wordpressVersion}}
         name: wordpress
@@ -38,12 +40,15 @@ spec:
           value: {{.Values.plugins}}
         - name: WORDPRESS_DATABASE_NAME
           value: wordpress
+        #configurar as variáveis do Redis
         ports:
         - containerPort: {{.Values.port}}
           name: wordpress
+        # Criar e montar o volume emptydir{}
         volumeMounts:
         - name: wordpress-persistent-storage
           mountPath: /var/www/html
+      # Criar post hook para dar permissão de leitura e escrita recursiva pra pasta /var/www/html 
       volumes:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:

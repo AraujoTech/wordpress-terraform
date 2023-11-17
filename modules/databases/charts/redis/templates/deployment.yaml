@@ -1,3 +1,4 @@
+#TODO  Configurar variáveis do redis
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,33 +20,33 @@ spec:
         tier: databases
     spec:
       containers:
-      - image: {{ .Values.image}}:{{ .Values.mysqlVersion}}
-        name: mysql
+      - image: {{ .Values.image}}:{{ .Values.redisVersion}}
+        name: redis
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{.Values.mysqlSecret}}
+              name: {{.Values.redisSecret}}
               key: root_password
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{.Values.mysqlSecret}}
+              name: {{.Values.redisSecret}}
               key: password
         - name: MYSQL_USER
           valueFrom:
             secretKeyRef:
-              name: {{.Values.mysqlSecret}}
+              name: {{.Values.redisSecret}}
               key: user
         - name: MYSQL_DATABASE
           value: wordpress
         ports:
         - containerPort: {{ .Values.port}}
-          name: mysql
+          name: redis
         volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
+        - name: redis-persistent-storage
+          mountPath: /var/lib/redis
       volumes:
-      - name: mysql-persistent-storage
+      - name: redis-persistent-storage
         persistentVolumeClaim:
           claimName: {{ .Release.Name }}-pv-claim

@@ -4,7 +4,7 @@ resource "kubernetes_namespace" "databases" {
   }
 }
 resource "helm_release" "postgresql" {
-  count = var.enable_databases.postgres ? 1 : 0
+ : 0
   name       = "postgresql"
   chart      = "${path.module}/charts/postgresql"
   namespace  = "${var.namespace}"
@@ -37,9 +37,9 @@ resource "helm_release" "postgresql" {
   }
 }
 
-resource "helm_release" "mysql" {
-  count = var.enable_databases.mysql ? 1 : 0
-  name       = "mysql"
+resource "helm_release" "redis" {
+ 
+  name       = "redis"
   chart      = "${path.module}/charts/mysql"
   namespace  = "${var.namespace}"
   force_update = true

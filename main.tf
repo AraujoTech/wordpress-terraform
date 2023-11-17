@@ -11,26 +11,36 @@ resource "helm_release" "kubernetes_replicator" {
 module "databases" {
     source = "./modules/databases"    
     namespace = var.database_namespace
-    enable_databases = {
-      postgres = false
-      mysql = true
-      redis = true
-    }
 
-    mysql_credentials = {
-      user = var.mysql_credentials.user
-      password = var.mysql_credentials. password
-      root_password = var.mysql_credentials.root_password
-      secret_name = var.mysql_credentials.secret_name
+    postgres_credentials = {
+      user = var.postgres_credentials.user
+      password = var.postgres_credentials. password
+      secret_name = var.postgres_credentials.secret_name
     }
     depends_on = [helm_release.kubernetes_replicator]
 }
 
 module "wordpress" {
     source = "./modules/wordpress"
-    database = {
-      secret_name = var.mysql_credentials.secret_name
-      host = "${module.databases.mysql_service}.${module.databases.databases_namespace}"
+    postgres = {
+      secret = var.postgres_credentials.secret_name
+      host = "${module.databases.postgres_service}.${module.databases.databases_namespace}"
+      name = var.postgres.name
+      port = var.postgres.port
+    }
+
+    wordpress={
+      tag = var.wordpress.tag
+      image = var.wordpress.image
+      port = var.wordpress.port
+    }
+
+    redis = {
+        tag = var.redis.tag
+        image = var.redis.image
+        port = var.redis.port
+        host = "${module.databases.redis_service}.${module.databases.databases_namespace}"
+        database = var.redis.database
     }
     depends_on = [helm_release.kubernetes_replicator, module.databases]
 }

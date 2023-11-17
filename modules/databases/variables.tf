@@ -1,3 +1,4 @@
+# TODO Revisar Variáveis
 variable "postgres_credentials" {
     type = object({
         user = string
@@ -27,7 +28,7 @@ variable "postgres" {
     description = "**postgres_version:**Versão do postgres, deve-se utilizar uma versão compatível com PG4WP. Para mais informações consulte https://github.com/PostgreSQL-For-Wordpress/postgresql-for-wordpress \n\n **image:** Imagem docker usada para o deployment do postgres \n\n **port:** Porta usada para acesso ao postgres "
 }
 
-variable "mysql_credentials" {
+variable "redis_credentials" {
     type = object({
         user = string
         password = string
@@ -38,35 +39,35 @@ variable "mysql_credentials" {
         user = "wordpress"
         password = ""
         root_password =""
-        secret_name = "mysql-keys"
+        secret_name = "redis-keys"
     }
     description = "**user:** User usado para acessar ao banco de dados. \n\n **root_password:** Password do super usuário do MySQL \n\n **password:** Password usado para acessar ao banco de dados. Se deixarmos em branco será gerada pelo helm na primeira execução. \n\n **secret_name:** Nome da secret que armazenará as informações do banco de dados "
     sensitive = true
 }
 
-variable "mysql" {
+variable "redis" {
     type = object({
-        mysql_version = string
+        redis_version = string
         image = string
         port = number
     })
     default = {
-        mysql_version = "8.2"
-        image = "mysql"
+        redis_version = "8.2"
+        image = "redis"
         port = 3306
     }
-    description = "**mysql_version:**Versão do mysql \n\n **image:** Imagem docker usada para o deployment do mysql \n\n **port:** Porta usada para acesso ao mysql"
+    description = "**redis_version:**Versão do redis \n\n **image:** Imagem docker usada para o deployment do redis \n\n **port:** Porta usada para acesso ao redis"
 }
 
 variable "enable_databases"{
     type = object({
         postgres = bool
-        mysql = bool
+        redis = bool
         redis = bool
     })
     default = {
         postgres = false
-        mysql = true
+        redis = true
         redis = true
     }
 }
