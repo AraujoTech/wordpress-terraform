@@ -26,7 +26,7 @@ variable "postgres" {
         port = 5432
         db = "wordpress"
     }
-    description = "**tag:**Tag da imagem do postgres, deve-se utilizar uma versão compatível com PG4WP. Para mais informações consulte https://github.com/PostgreSQL-For-Wordpress/postgresql-for-wordpress \n\n **image:** Imagem docker usada para o deployment do postgres \n\n **port:** Porta usada para acesso ao postgres \n\n **db:** Nome do banco de dados a ser criado "
+    description = "**tag:** Tag da imagem do postgres, deve-se utilizar uma versão compatível com PG4WP. Para mais informações consulte https://github.com/PostgreSQL-For-Wordpress/postgresql-for-wordpress \n\n **image:** Imagem docker usada para o deployment do postgres \n\n **port:** Porta usada para acesso ao postgres \n\n **db:** Nome do banco de dados a ser criado "
 }
 
 variable "redis" {
@@ -42,7 +42,7 @@ variable "redis" {
         port = 6379
         db = 1
     }
-    description = "**tag:**Tag da imagem do redis \n\n **image:** Imagem docker usada para o deployment do redis \n\n **port:** Porta usada para acesso ao redis \n\n **db:**# -- Banco de Dados usado pelo cache: 0-15"
+    description = "**tag:** Tag da imagem do redis \n\n **image:** Imagem docker usada para o deployment do redis \n\n **port:** Porta usada para acesso ao redis \n\n **db:**# -- Banco de Dados usado pelo cache: 0-15"
 }
 
 
