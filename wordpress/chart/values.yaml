@@ -1,0 +1,30 @@
+wordpress:
+# -- Imagem docker usada para o deployment do wordpress. Para este projeto foi desenvolvida uma imagem personalizada do wordpress com PG4WP configurado e as configurações necessárias para o uso do Redis. Para mais informações consulte  https://github.com/AraujoTech/wordpress-postgres
+  image: rafaelmendonca29/wordpress-postgres
+
+# -- Tag da imagem da imagem do wordpress utilizada, a mesma deve conter o PG4WP. Para mais informações consulte https://github.com/PostgreSQL-For-Wordpress/postgresql-for-wordpress 
+  tag: "6.3-php8.2-apache-redis"
+
+# -- Porta usada para acesso ao wordpress
+  port: 80
+
+postgres:
+# -- Host para conexão com o banco de dados
+  host:
+
+# -- Nome da secret que armazenará as informações do banco de dados
+  secret: postgres-keys
+
+# -- Porta usada para acesso ao postgres
+  port: 5432
+# -- Nome do Banco de dados
+  db: wordpress
+
+redis:
+  # -- Host para conexão com o banco de dados
+  host:
+
+  # -- Porta usada para acesso ao mysql
+  port: 6379
+  # -- Banco de Dados usado pelo cache: 0-15
+  db: 1

@@ -46,22 +46,7 @@ variable "redis" {
 }
 
 
-variable "wordpress" {
-    type = object({
-        tag = string
-        image = string
-        port = number 
-    })
-    default = {
-        tag = "6.3-php8.2-apache-redis"
-        image = "rafaelmendonca29/wordpress-postgres"
-        port = 80
-    }
-    description = "**tag:** Tag da imagem da imagem do wordpress utilizada \n\n **image**: Imagem docker usada para o deployment do wordpress  \n\n **port:** Porta usada para acesso ao wordpress"
-}
-
-
-variable "db_namespace"{
+variable "namespace"{
     type = string
     default = "databases"
     description = "nome do namespace que deverá ser usado pelos databases"

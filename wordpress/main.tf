@@ -6,30 +6,30 @@ resource "helm_release" "wordpress" {
   create_namespace = true
   
   set {
-    name="image"
+    name="wordpress.image"
     value= var.wordpress.image
   }
 
     set {
-    name="wordpressVersion"
-    value= var.wordpress.wordpress_version
+    name="wordpress.tag"
+    value= var.wordpress.tag
   }
 
    set {
-    name="port"
+    name="wordpress.port"
     value= var.wordpress.port
   }
 
   set {
-    name="databaseHost"
-    value= var.database.host
+    name="postgres.host"
+    value= var.postgres.host
   }
   set {
-    name="databaseSecret"
-    value= var.database.secret_name
+    name="postgres.secret"
+    value= var.postgres.secret
   }
   set {
-    name="plugins"
-    value= var.wordpress.plugins
+    name="postgres.db"
+    value= var.postgres.db
   }
 }

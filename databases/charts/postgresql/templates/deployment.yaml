@@ -19,25 +19,27 @@ spec:
         tier: databases
     spec:
       containers:
-      - image: {{ .Values.image}}:{{ .Values.postgresVersion}}
+      - image: {{ .Values.postgres.image}}:{{ .Values.postgres.tag }}
         name: postgresql
         env:
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{.Values.postgresSecret}}
+              name: {{.Values.secrets.secret}}
               key: password
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: {{.Values.postgresSecret}}
+              name: {{.Values.secrets.secret}}
               key: user
+        - name: POSTGRES_DB
+          value: {{ .Values.postgres.db }}
         ports:
-        - containerPort: {{ .Values.port}}
+        - containerPort: {{ .Values.postgres.port}}
           name: postgresql
         volumeMounts:
         - name: postgresql-persistent-storage
-          mountPath: /var/lib/postgresql
+          mountPath: /var/lib/postgresql/data
       volumes:
       - name: postgresql-persistent-storage
         persistentVolumeClaim:

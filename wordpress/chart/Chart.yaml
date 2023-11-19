@@ -1,6 +1,6 @@
 apiVersion: v2
 name: k8s
-description: Chart Auxiliar para deploy do Postgres
+description: Chart Auxiliar para deploy do Wordpress
 
 # A chart can be either an 'application' or a 'library' chart.
 #

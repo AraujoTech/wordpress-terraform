@@ -1,0 +1,11 @@
+
+# -- Imagem docker usada para o deployment do Redis
+image: redis
+
+# -- Tag da imagem do redis
+tag: 6.2-alpine
+
+# -- Porta usada para acesso ao mysql
+port: 6379
+# -- Banco de Dados usado pelo cache: 0-15
+db: 1

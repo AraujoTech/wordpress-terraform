@@ -1,0 +1,22 @@
+postgres:
+# -- Imagem docker usada para o deployment do postgres
+  image: postgres
+
+# -- Tag da imagem do postgres, se quiser usar com o wordpress deve-se utilizar uma versão compatível com PG4WP, no entanto **não é recomendável**, pois o Wordpress foi desenvolvido para trabalhar com MySQL. É possível usar o PG4WP, mas o mesmo não funciona corretamente no wordpress rodando em docker. Para mais informações consulte https://github.com/PostgreSQL-For-Wordpress/postgresql-for-wordpress 
+  tag: 14.2
+
+# -- Porta usada para acesso ao postgres
+  port: 5432
+
+# --  Nome do banco de dados a ser criado
+  db: wordpress
+secrets:
+# -- Nome da secret que armazenará as informações do banco de dados
+  secret: postgres-keys
+
+# -- User usado para acessar ao banco de dados. 
+  user: wordpress
+
+# -- Password usado para acessar ao banco de dados. 
+  password: gerada automaticamente
+

@@ -7,8 +7,9 @@ metadata:
     app: wordpress
 spec:
   ports:
-    - port: {{ .Values.port}}
+    - port: {{ .Values.wordpress.port}}
   selector:
     app: wordpress
-    tier: databases
-  clusterIP: None
+    tier: frontend
+  type: LoadBalancer
+---
