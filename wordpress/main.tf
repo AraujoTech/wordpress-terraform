@@ -32,4 +32,18 @@ resource "helm_release" "wordpress" {
     name="postgres.db"
     value= var.postgres.db
   }
+
+  set {
+    name="redis.db"
+    value= var.redis.db
+  }
+
+set {
+    name="redis.host"
+    value= var.redis.host
+  }
+set {
+    name="redis.port"
+    value= var.redis.port
+  }
 }

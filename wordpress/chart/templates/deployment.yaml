@@ -24,7 +24,7 @@ spec:
         volumeMounts:
         - name: wordpress-data
           mountPath: /data
-      command: [cp, -a, /var/www/., /data]
+        command: ["sh", "-c", "cp -a /var/www/html/. /data"]
       containers:
       - image: {{ .Values.wordpress.image}}:{{ .Values.wordpress.tag}}
         name: wordpress
@@ -60,11 +60,11 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: ["bash", "-c", "chmod 755 -R /var/www/html"]
+              command: ["sh", "-c", "chmod 755 -R /var/www/html"]
       volumes:
-      - name: wordpress-persistent-storage
-        persistentVolumeClaim:
-          claimName: {{ .Release.Name }}-pv-claim
+      # - name: wordpress-persistent-storage
+      #   persistentVolumeClaim:
+      #     claimName: {{ .Release.Name }}-pv-claim
       - name: wordpress-data
         emptyDir: {}
           
