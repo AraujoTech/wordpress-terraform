@@ -60,7 +60,7 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: ["sh", "-c", "chmod 755 -R /var/www/html"]
+              command: ["sh", "-c", "chmod 767 -R /var/www/html"]
       volumes:
       # - name: wordpress-persistent-storage
       #   persistentVolumeClaim:
