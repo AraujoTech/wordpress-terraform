@@ -39,6 +39,27 @@ resource "helm_release" "postgresql" {
     name="postgres.db"
     value= var.postgres.db
   }
+
+  set {
+    name="resources.requests.cpu"
+    value= var.postgres.cpu_requests
+  }
+
+  set {
+    name="resources.requests.memory"
+    value= var.postgres.memory_requests
+  }
+
+  set {
+    name="resources.limits.cpu"
+    value= var.postgres.cpu_limits
+  }
+
+  set {
+    name="resources.limits.memory"
+    value= var.postgres.memory_limits
+  }
+    
 }
 
 resource "helm_release" "redis" {
@@ -65,5 +86,25 @@ resource "helm_release" "redis" {
   set {
     name="db"
     value= var.redis.db
+  }
+
+  set {
+    name="resources.requests.cpu"
+    value= var.redis.cpu_requests
+  }
+
+  set {
+    name="resources.requests.memory"
+    value= var.redis.memory_requests
+  }
+
+  set {
+    name="resources.limits.cpu"
+    value= var.redis.cpu_limits
+  }
+
+  set {
+    name="resources.limits.memory"
+    value= var.redis.memory_limits
   }
 }

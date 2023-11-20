@@ -20,6 +20,7 @@ postgres:
 # -- Nome do Banco de dados
   db: wordpress
 
+
 redis:
   # -- Host para conexão com o banco de dados
   host:
@@ -28,3 +29,22 @@ redis:
   port: 6379
   # -- Banco de Dados usado pelo cache: 0-15
   db: 1
+
+resources:
+  requests:
+    # -- Especifica a quantidade mínima de CPU que cada pod do contêiner deve ter disponível. As unidades de medida para CPU são milicores (m).
+    cpu: 256m
+    # -- Especifica a quantidade mínima de memória que cada pod do contêiner deve ter disponível. As unidades de medida para memória são bytes (B), kibibytes (Ki), mebibytes (Mi), etc.
+    memory: 256Mi
+  limits:
+    # -- Especifica o máximo de CPU que cada pod do contêiner pode consumir.
+    cpu: 512m
+    # -- Especifica o máximo de memória que cada pod do contêiner pode consumir.
+    memory: 512Mi
+
+# -- O Horizontal Pod Autoscaler (HPA) é um recurso no Kubernetes que ajusta automaticamente o número de réplicas de um Deployment, ReplicaSet ou StatefulSet com base na utilização de recursos ou métricas personalizadas, garantindo uma escalabilidade dinâmica para atender às demandas variáveis.
+  hpa:
+# -- Minimo de réplicas dos pods
+    min_replicas: 1
+# -- Máximo de réplicas dos pods
+    max_replicas: 5

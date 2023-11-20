@@ -23,6 +23,13 @@ module "databases" {
         image = var.postgres.image
         port = var.postgres.port
         db= var.postgres.db
+        cpu_requests= var.postgres.cpu_requests
+        cpu_limits= var.postgres.cpu_limits
+        memory_requests=  var.postgres.memory_requests
+        memory_limits= var.postgres.memory_limits
+        min_replicas = var.postgres.min_replicas
+        max_replicas = var.postgres.max_replicas
+
     }
 
     redis = {
@@ -30,6 +37,12 @@ module "databases" {
         image = var.redis.image
         port = var.redis.port
         db= var.redis.db
+        cpu_requests= var.redis.cpu_requests
+        cpu_limits= var.redis.cpu_limits
+        memory_requests=  var.redis.memory_requests
+        memory_limits= var.redis.memory_limits
+        min_replicas = var.redis.min_replicas
+        max_replicas = var.redis.max_replicas
     }
     depends_on = [helm_release.kubernetes_replicator]
 }
@@ -47,6 +60,12 @@ module "wordpress" {
       tag = var.wordpress.tag
       image = var.wordpress.image
       port = var.wordpress.port
+      cpu_requests= var.wordpress.cpu_requests
+      cpu_limits= var.wordpress.cpu_limits
+      memory_requests=  var.wordpress.memory_requests
+      memory_limits= var.wordpress.memory_limits
+      min_replicas = var.wordpress.min_replicas
+      max_replicas = var.wordpress.max_replicas
     }
 
     redis = {

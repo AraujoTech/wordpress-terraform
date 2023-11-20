@@ -57,14 +57,21 @@ spec:
         volumeMounts:
         - name: wordpress-data
           mountPath: /var/www/html
+        resources:
+          limits:
+            cpu: {{.Values.resources.limits.cpu}}
+            memory: {{.Values.resources.limits.memory}}
+          requests:
+            cpu: {{.Values.resources.requests.cpu}}
+            memory: {{.Values.resources.requests.memory}}
         lifecycle:
           postStart:
             exec:
               command: ["sh", "-c", "chmod 767 -R /var/www/html"]
       volumes:
-      # - name: wordpress-persistent-storage
-      #   persistentVolumeClaim:
-      #     claimName: {{ .Release.Name }}-pv-claim
+      - name: wordpress-persistent-storage
+        persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-pv-claim
       - name: wordpress-data
         emptyDir: {}
           
