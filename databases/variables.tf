@@ -25,7 +25,6 @@ variable "postgres" {
         memory_limits= string
         min_replicas = number 
         max_replicas = number
-
     })
     default = {
         tag = "14.2"
@@ -39,7 +38,7 @@ variable "postgres" {
         min_replicas = 1
         max_replicas = 5
     }
-    description = "**tag:** Tag da imagem do postgres, deve-se utilizar uma versão compatível com PG4WP. Para mais informações consulte https://github.com/PostgreSQL-For-Wordpress/postgresql-for-wordpress \n\n **image:** Imagem docker usada para o deployment do postgres \n\n **port:** Porta usada para acesso ao postgres \n\n **db:** Nome do banco de dados a ser criado \n\n **cpu_requests:** Especifica a quantidade mínima de CPU que cada pod do contêiner deve ter disponível. As unidades de medida para CPU são milicores (m). \n\n **cpu_limits:** Especifica o máximo de CPU que cada pod do contêiner pode consumir. \n\n **memory_requests:** Especifica a quantidade mínima de memória que cada pod do contêiner deve ter disponível. As unidades de medida para memória são bytes (B), kibibytes (Ki), mebibytes (Mi), etc. \n\n **memory_limits:** Especifica o máximo de memória que cada pod do contêiner pode consumir. \n\n **min_replicas:** Minimo de réplicas dos pods \n\n **max_replicas:** Máximo de réplicas dos pods"
+    description = "**tag:** Tag da imagem do postgres, deve-se utilizar uma versão compatível com PG4WP. Para mais informações consulte https://github.com/PostgreSQL-For-Wordpress/postgresql-for-wordpress \n\n **image:** Imagem docker usada para o deployment do postgres \n\n **port:** Porta usada para acesso ao postgres \n\n **db:** Nome do banco de dados a ser criado \n\n **cpu_requests:** Especifica a quantidade mínima de CPU que cada pod do contêiner deve ter disponível. As unidades de medida para CPU são milicores (m). \n\n **cpu_limits:** Especifica o máximo de CPU que cada pod do contêiner pode consumir. \n\n **memory_requests:** Especifica a quantidade mínima de memória que cada pod do contêiner deve ter disponível. As unidades de medida para memória são bytes (B), kibibytes (Ki), mebibytes (Mi), etc. \n\n **memory_limits:** Especifica o máximo de memória que cada pod do contêiner pode consumir. \n\n **min_replicas:** Minimo de réplicas dos pods \n\n **max_replicas:** Máximo de réplicas dos pods \n\n"
 }
 
 variable "redis" {
@@ -68,7 +67,7 @@ variable "redis" {
         min_replicas = 1
         max_replicas = 5
     }
-    description = "**tag:** Tag da imagem do redis \n\n **image:** Imagem docker usada para o deployment do redis \n\n **port:** Porta usada para acesso ao redis \n\n **db:**# -- Banco de Dados usado pelo cache: 0-15 \n\n **cpu_requests:** Especifica a quantidade mínima de CPU que cada pod do contêiner deve ter disponível. As unidades de medida para CPU são milicores (m). \n\n **cpu_limits:** Especifica o máximo de CPU que cada pod do contêiner pode consumir. \n\n **memory_requests:** Especifica a quantidade mínima de memória que cada pod do contêiner deve ter disponível. As unidades de medida para memória são bytes (B), kibibytes (Ki), mebibytes (Mi), etc. \n\n **memory_limits:** Especifica o máximo de memória que cada pod do contêiner pode consumir. \n\n **min_replicas:** Minimo de réplicas dos pods \n\n **max_replicas:** Máximo de réplicas dos pods"
+    description = "**tag:** Tag da imagem do redis \n\n **image:** Imagem docker usada para o deployment do redis \n\n **port:** Porta usada para acesso ao redis \n\n **db:**# -- Banco de Dados usado pelo cache: 0-15 \n\n **cpu_requests:** Especifica a quantidade mínima de CPU que cada pod do contêiner deve ter disponível. As unidades de medida para CPU são milicores (m). \n\n **cpu_limits:** Especifica o máximo de CPU que cada pod do contêiner pode consumir. \n\n **memory_requests:** Especifica a quantidade mínima de memória que cada pod do contêiner deve ter disponível. As unidades de medida para memória são bytes (B), kibibytes (Ki), mebibytes (Mi), etc. \n\n **memory_limits:** Especifica o máximo de memória que cada pod do contêiner pode consumir. \n\n **min_replicas:** Minimo de réplicas dos pods \n\n **max_replicas:** Máximo de réplicas dos pods \n\n"
 }
 
 

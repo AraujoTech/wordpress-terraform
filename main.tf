@@ -29,6 +29,7 @@ module "databases" {
         memory_limits= var.postgres.memory_limits
         min_replicas = var.postgres.min_replicas
         max_replicas = var.postgres.max_replicas
+ 
 
     }
 
@@ -66,6 +67,7 @@ module "wordpress" {
       memory_limits= var.wordpress.memory_limits
       min_replicas = var.wordpress.min_replicas
       max_replicas = var.wordpress.max_replicas
+ 
     }
 
     redis = {

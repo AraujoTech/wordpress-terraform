@@ -1,13 +1,4 @@
 <!-- BEGIN_AUTOMATED_TF_DOCS_BLOCK -->
-#### Requirements
-
-No requirements.
-#### Providers
-
-| Name | Version |
-|------|---------|
-| <a name="provider_helm"></a> [helm](#provider\_helm) | n/a |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | n/a |
 #### Resources
 
 | Name | Type |
@@ -20,14 +11,14 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | nome do namespace que deverá ser usado pelos databases | `string` | `"databases"` | no |
-| <a name="input_postgres"></a> [postgres](#input\_postgres) | **tag:** Tag da imagem do postgres, deve-se utilizar uma versão compatível com PG4WP. Para mais informações consulte https://github.com/PostgreSQL-For-Wordpress/postgresql-for-wordpress <br><br> **image:** Imagem docker usada para o deployment do postgres <br><br> **port:** Porta usada para acesso ao postgres <br><br> **db:** Nome do banco de dados a ser criado | <pre>object({<br>        tag = string<br>        image = string<br>        port = number<br>        db = string<br>    })</pre> | <pre>{<br>  "db": "wordpress",<br>  "image": "postgres",<br>  "port": 5432,<br>  "tag": "14.2"<br>}</pre> | no |
+| <a name="input_postgres"></a> [postgres](#input\_postgres) | **tag:** Tag da imagem do postgres, deve-se utilizar uma versão compatível com PG4WP. Para mais informações consulte https://github.com/PostgreSQL-For-Wordpress/postgresql-for-wordpress <br><br> **image:** Imagem docker usada para o deployment do postgres <br><br> **port:** Porta usada para acesso ao postgres <br><br> **db:** Nome do banco de dados a ser criado <br><br> **cpu\_requests:** Especifica a quantidade mínima de CPU que cada pod do contêiner deve ter disponível. As unidades de medida para CPU são milicores (m). <br><br> **cpu\_limits:** Especifica o máximo de CPU que cada pod do contêiner pode consumir. <br><br> **memory\_requests:** Especifica a quantidade mínima de memória que cada pod do contêiner deve ter disponível. As unidades de medida para memória são bytes (B), kibibytes (Ki), mebibytes (Mi), etc. <br><br> **memory\_limits:** Especifica o máximo de memória que cada pod do contêiner pode consumir. <br><br> **min\_replicas:** Minimo de réplicas dos pods <br><br> **max\_replicas:** Máximo de réplicas dos pods | <pre>object({<br>        tag = string<br>        image = string<br>        port = number<br>        db = string<br>        cpu_requests= string<br>        cpu_limits= string<br>        memory_requests= string<br>        memory_limits= string<br>        min_replicas = number <br>        max_replicas = number<br>    })</pre> | <pre>{<br>  "cpu_limits": "512m",<br>  "cpu_requests": "256m",<br>  "db": "wordpress",<br>  "image": "postgres",<br>  "max_replicas": 5,<br>  "memory_limits": "512Mi",<br>  "memory_requests": "256Mi",<br>  "min_replicas": 1,<br>  "port": 5432,<br>  "tag": "14.2"<br>}</pre> | no |
 | <a name="input_postgres_credentials"></a> [postgres\_credentials](#input\_postgres\_credentials) | **user:** User usado para acessar ao banco de dados. <br><br> **password:** Password usado para acessar ao banco de dados. Se deixarmos ela em branco será gerada pelo helm na primeira execução. <br><br> **secret:** Nome da secret que armazenará as informações do banco de dados | <pre>object({<br>        user = string<br>        password = string<br>        secret = string<br>    })</pre> | <pre>{<br>  "password": "",<br>  "secret": "postgres-keys",<br>  "user": "wordpress"<br>}</pre> | no |
-| <a name="input_redis"></a> [redis](#input\_redis) | **tag:** Tag da imagem do redis <br><br> **image:** Imagem docker usada para o deployment do redis <br><br> **port:** Porta usada para acesso ao redis <br><br> **db:**# -- Banco de Dados usado pelo cache: 0-15 | <pre>object({<br>        tag = string<br>        image = string<br>        port = number<br>        db = number<br>    })</pre> | <pre>{<br>  "db": 1,<br>  "image": "redis",<br>  "port": 6379,<br>  "tag": "6.2-alpine"<br>}</pre> | no |
+| <a name="input_redis"></a> [redis](#input\_redis) | **tag:** Tag da imagem do redis <br><br> **image:** Imagem docker usada para o deployment do redis <br><br> **port:** Porta usada para acesso ao redis <br><br> **db:**# -- Banco de Dados usado pelo cache: 0-15 <br><br> **cpu\_requests:** Especifica a quantidade mínima de CPU que cada pod do contêiner deve ter disponível. As unidades de medida para CPU são milicores (m). <br><br> **cpu\_limits:** Especifica o máximo de CPU que cada pod do contêiner pode consumir. <br><br> **memory\_requests:** Especifica a quantidade mínima de memória que cada pod do contêiner deve ter disponível. As unidades de medida para memória são bytes (B), kibibytes (Ki), mebibytes (Mi), etc. <br><br> **memory\_limits:** Especifica o máximo de memória que cada pod do contêiner pode consumir. <br><br> **min\_replicas:** Minimo de réplicas dos pods <br><br> **max\_replicas:** Máximo de réplicas dos pods | <pre>object({<br>        tag = string<br>        image = string<br>        port = number<br>        db = number<br>        cpu_requests= string<br>        cpu_limits= string<br>        memory_requests= string<br>        memory_limits= string<br>        min_replicas = number <br>        max_replicas = number<br><br>    })</pre> | <pre>{<br>  "cpu_limits": "512m",<br>  "cpu_requests": "256m",<br>  "db": 1,<br>  "image": "redis",<br>  "max_replicas": 5,<br>  "memory_limits": "512Mi",<br>  "memory_requests": "256Mi",<br>  "min_replicas": 1,<br>  "port": 6379,<br>  "tag": "6.2-alpine"<br>}</pre> | no |
 #### Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_databases_namespace"></a> [databases\_namespace](#output\_databases\_namespace) | n/a |
-| <a name="output_postgres_service"></a> [postgres\_service](#output\_postgres\_service) | n/a |
-| <a name="output_redis_service"></a> [redis\_service](#output\_redis\_service) | n/a |
+| <a name="output_databases_namespace"></a> [databases\_namespace](#output\_databases\_namespace) | Namespace dos bancos de dados |
+| <a name="output_postgres_service"></a> [postgres\_service](#output\_postgres\_service) | Nome do serviço postgres |
+| <a name="output_redis_service"></a> [redis\_service](#output\_redis\_service) | Nome do serviço redis |
 <!-- END_AUTOMATED_TF_DOCS_BLOCK -->

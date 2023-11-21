@@ -59,7 +59,6 @@ resource "helm_release" "postgresql" {
     name="resources.limits.memory"
     value= var.postgres.memory_limits
   }
-    
 }
 
 resource "helm_release" "redis" {
@@ -107,4 +106,5 @@ resource "helm_release" "redis" {
     name="resources.limits.memory"
     value= var.redis.memory_limits
   }
+   
 }

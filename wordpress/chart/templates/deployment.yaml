@@ -43,8 +43,8 @@ spec:
             secretKeyRef:
               name: {{ .Values.postgres.secret }}
               key: user
-        - name: WORDPRESS_DB_NAME
-          value: "{{ .Values.postgres.db}}"
+        # - name: WORDPRESS_DB_NAME
+        #   value: "{{ .Values.postgres.db}}"
         - name: WORDPRESS_REDIS_HOST
           value: "{{.Values.redis.host}}"
         - name: WORDPRESS_REDIS_PORT

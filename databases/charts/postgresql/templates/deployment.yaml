@@ -10,6 +10,7 @@ spec:
     matchLabels:
       app: wordpress
       tier: databases
+      database: postgres
   strategy:
     type: Recreate
   template:
@@ -17,6 +18,8 @@ spec:
       labels:
         app: wordpress
         tier: databases
+        database: postgres
+
     spec:
       containers:
       - image: {{ .Values.postgres.image}}:{{ .Values.postgres.tag }}
@@ -37,6 +40,13 @@ spec:
         ports:
         - containerPort: {{ .Values.postgres.port}}
           name: postgresql
+        resources:
+          limits:
+            cpu: {{.Values.resources.limits.cpu}}
+            memory: {{.Values.resources.limits.memory}}
+          requests:
+            cpu: {{.Values.resources.requests.cpu}}
+            memory: {{.Values.resources.requests.memory}}
         volumeMounts:
         - name: postgresql-persistent-storage
           mountPath: /var/lib/postgresql/data
