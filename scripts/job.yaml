@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wordpress-data-loader
+spec:
+  template:
+    spec:
+      containers:
+      - name: data-loader
+        image: your-docker-image:tag
+        command: ["python", "load_data.py", "postgresql-svc.databases.svc.cluster.local", "<database_name>", "<username>", "<password>"]
+      restartPolicy: Never
+  backoffLimit: 4

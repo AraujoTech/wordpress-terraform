@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: wordpress
+spec:
+  selector:
+    matchLabels:
+      app: wordpress
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        tier: frontend
+    spec:
+      initContainers:
+      - name: populate
+        image: {{ .Values.wordpress.image}}:{{ .Values.wordpress.tag}}
+        volumeMounts:
+        - name: wordpress-data
+          mountPath: /data
+        command: ["sh", "-c", "cp -a /var/www/html/. /data"]
+      containers:
+      - image: {{ .Values.wordpress.image}}:{{ .Values.wordpress.tag}}
+        name: wordpress
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: "{{ .Values.postgres.host }}"
+        - name: WORDPRESS_DB_PORT
+          value: "{{ .Values.postgres.port }}"
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.postgres.secret }}
+              key: password
+        - name: WORDPRESS_DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.postgres.secret }}
+              key: user
+        # - name: WORDPRESS_DB_NAME
+        #   value: "{{ .Values.postgres.db}}"
+        - name: WORDPRESS_REDIS_HOST
+          value: "{{.Values.redis.host}}"
+        - name: WORDPRESS_REDIS_PORT
+          value: "{{.Values.redis.port}}"
+        - name: WORDPRESS_REDIS_DATABASE
+          value: "{{.Values.redis.db}}"
+        ports:
+        - containerPort: {{.Values.wordpress.port}}
+          name: wordpress
+        volumeMounts:
+        - name: wordpress-data
+          mountPath: /var/www/html
+        resources:
+          limits:
+            cpu: {{.Values.resources.limits.cpu}}
+            memory: {{.Values.resources.limits.memory}}
+          requests:
+            cpu: {{.Values.resources.requests.cpu}}
+            memory: {{.Values.resources.requests.memory}}
+        lifecycle:
+          postStart:
+            exec:
+              command: ["sh", "-c", "chmod 767 -R /var/www/html"]
+      volumes:
+      - name: wordpress-persistent-storage
+        persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-pv-claim
+      - name: wordpress-data
+        emptyDir: {}
+          

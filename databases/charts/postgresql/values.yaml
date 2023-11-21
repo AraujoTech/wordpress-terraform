@@ -1,0 +1,40 @@
+postgres:
+# -- Imagem docker usada para o deployment do postgres
+  image: postgres
+
+# -- Tag da imagem do postgres, se quiser usar com o wordpress deve-se utilizar uma versão compatível com PG4WP, no entanto **não é recomendável**, pois o Wordpress foi desenvolvido para trabalhar com MySQL. É possível usar o PG4WP, mas o mesmo não funciona corretamente no wordpress rodando em docker. Para mais informações consulte https://github.com/PostgreSQL-For-Wordpress/postgresql-for-wordpress 
+  tag: 14.2
+
+# -- Porta usada para acesso ao postgres
+  port: 5432
+
+# --  Nome do banco de dados a ser criado
+  db: wordpress
+secrets:
+# -- Nome da secret que armazenará as informações do banco de dados
+  secret: postgres-keys
+
+# -- User usado para acessar ao banco de dados. 
+  user: wordpress
+
+# -- Password usado para acessar ao banco de dados. 
+  password: gerada automaticamente
+
+resources:
+  requests:
+    # -- Especifica a quantidade mínima de CPU que cada pod do contêiner deve ter disponível. As unidades de medida para CPU são milicores (m).
+    cpu: 256m
+    # -- Especifica a quantidade mínima de memória que cada pod do contêiner deve ter disponível. As unidades de medida para memória são bytes (B), kibibytes (Ki), mebibytes (Mi), etc.
+    memory: 256Mi
+  limits:
+    # -- Especifica o máximo de CPU que cada pod do contêiner pode consumir.
+    cpu: 512m
+    # -- Especifica o máximo de memória que cada pod do contêiner pode consumir.
+    memory: 512Mi
+
+# -- O Horizontal Pod Autoscaler (HPA) é um recurso no Kubernetes que ajusta automaticamente o número de réplicas de um Deployment, ReplicaSet ou StatefulSet com base na utilização de recursos ou métricas personalizadas, garantindo uma escalabilidade dinâmica para atender às demandas variáveis.
+hpa:
+# -- Minimo de réplicas dos pods
+  min_replicas: 1
+# -- Máximo de réplicas dos pods
+  max_replicas: 5
